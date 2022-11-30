@@ -32,7 +32,7 @@ jobs:
             echo "WAR $WAR_NAME retrieved from artifactId"
           fi
           echo $WAR_NAME >>GITHUB_ENV
-          echo $WAR_NAME
+          
       - name: Download release artifact on application server
         run: |
           artifact=$GROUP_ID:$ARTIFACT_ID:$WAR_NAME:war
