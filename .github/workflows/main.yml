@@ -22,7 +22,7 @@ jobs:
           ARTIFACT_ID: $(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
           GROUP_ID: $(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
           ARTIFACT_VERSION: "0.0.21"
-            echo $ARTIFACT_ID and $GROUP_ID
+          
         run: echo $ARTIFACT_ID and $GROUP_ID
       
       - name: Download release artifact on application server
