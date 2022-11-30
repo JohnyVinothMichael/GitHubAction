@@ -18,6 +18,7 @@ jobs:
         run: mvn clean install --file pom.xml
 
       - name: Get Group and Artifact ID from POM
+        run:
         env:
           ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
           GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
