@@ -18,12 +18,12 @@ jobs:
         run: mvn clean install --file pom.xml
 
       - name: Get Group and Artifact ID from POM 
-        run: echo ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout) >> $GITHUB_ENV
-             echo GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout) >> $GITHUB_ENV
-             echo ARTIFACT_VERSION="0.0.1"
+        run: echo "ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
+             echo "GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)" >> $GITHUB_ENV
+             echo "ARTIFACT_VERSION="0.0.1" " >> $GITHUB_ENV
       
       - name: Download release artifact on application server
         run:  |
-          echo "Values " $ARTIFACT_ID and GROUP_ID and $ARTIFACT_VERSION
+          echo $ARTIFACT_ID  GROUP_ID  $ARTIFACT_VERSION
           artifact=$GROUP_ID:$ARTIFACT_ID:$ARTIFACT_VERSION:war
           echo $artifact
