@@ -35,5 +35,5 @@ jobs:
           echo $WAR_NAME
       - name: Download release artifact on application server
         run: |
-          artifact=$GROUP_ID:$ARTIFACT_ID:$ARTIFACT_VERSION:war
+          artifact=$GROUP_ID:$ARTIFACT_ID:$WAR_NAME:war
           echo $artifact
