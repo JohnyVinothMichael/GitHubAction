@@ -21,7 +21,8 @@ jobs:
         run: |
            echo ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout) >> $GITHUB_ENV
            echo GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout) >> $GITHUB_ENV
-           echo ARTIFACT_VERSION="0.0.1" >> $GITHUB_ENV
+           ARTIFACT_VERSION="0.0.1"
+           $ARTIFACT_VERSION >>$GITHUB_ENV
       
       - name: Download release artifact on application server
         run: |
