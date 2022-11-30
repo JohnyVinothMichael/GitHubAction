@@ -23,7 +23,16 @@ jobs:
            echo GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout) >> $GITHUB_ENV
            ARTIFACT_VERSION=$ARTIFACT_ID
            echo "$ARTIFACT_VERSION" >>$GITHUB_ENV
-      
+
+      - name: Get the war name from pom file
+        run: |
+          WAR_NAME=$(grep finalName pom.xml  | cut -f 2 -d '>' | cut -f 1 -d '<')
+          if [[ -z $WAR_NAME ]] ; then
+            WAR_NAME=$ARTIFACT_ID
+            echo "WAR $WAR_NAME retrieved from artifactId"
+          fi
+          echo $WAR_NAME >>GITHUB_ENV
+          echo $WAR_NAME
       - name: Download release artifact on application server
         run: |
           artifact=$GROUP_ID:$ARTIFACT_ID:$ARTIFACT_VERSION:war

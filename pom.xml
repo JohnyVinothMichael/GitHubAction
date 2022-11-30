@@ -32,6 +32,7 @@
 	</dependencies>
 
 	<build>
+	<finalName>TestFinalName</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
