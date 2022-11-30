@@ -26,13 +26,12 @@ jobs:
       - name: Get the war name from pom file
         run: |
           WAR_NAME=$(grep finalName pom.xml  | cut -f 2 -d '>' | cut -f 1 -d '<')
-          WAR_NAME = $WAR_NAME >> $GITHUB_ENV
+          echo WAR_NAME = $WAR_NAME >> $GITHUB_ENV
           echo "value of war $WAR_NAME"
           if [[ -z $WAR_NAME ]] ; then
             WAR_NAME=$ARTIFACT_ID
             echo "WAR $WAR_NAME retrieved from artifactId"
           fi
-          echo WAR_NAME=$WAR_NAME >> $GITHUB_ENV
 
       - name: Download release artifact on application server
         run: |
