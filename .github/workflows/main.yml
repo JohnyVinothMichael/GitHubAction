@@ -25,7 +25,8 @@ jobs:
 
       - name: Get the war name from pom file
         run: |
-          echo WAR_NAME=$(grep finalName pom.xml  | cut -f 2 -d '>' | cut -f 1 -d '<') >> $GITHUB_ENV
+              WAR_NAME=$(grep finalName pom.xml  | cut -f 2 -d '>' | cut -f 1 -d '<')
+              WAR_NAME = $WAR_NAME >> $GITHUB_ENV
           echo "value of war $WAR_NAME"
           if [[ -z $WAR_NAME ]] ; then
             WAR_NAME=$ARTIFACT_ID
