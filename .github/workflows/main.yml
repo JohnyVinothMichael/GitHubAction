@@ -26,7 +26,7 @@ jobs:
       - name: Get the war name from pom file
         run: |
           WAR_NAME=$(grep finalName pom.xml  | cut -f 2 -d '>' | cut -f 1 -d '<')
-          echo WAR_NAME = $WAR_NAME >> $GITHUB_ENV
+          echo WAR_NAME=$WAR_NAME >> $GITHUB_ENV
           if [[ -z $WAR_NAME ]] ; then
             WAR_NAME=$ARTIFACT_ID
             echo "WAR $WAR_NAME retrieved from artifactId"
@@ -37,3 +37,4 @@ jobs:
           artifact=$GROUP_ID:$ARTIFACT_ID:$WAR_NAME:$ARTIFACT_VERSION:war
           echo $artifact
           echo "value of war $WAR_NAME"
+          echo $WAR_NAME
