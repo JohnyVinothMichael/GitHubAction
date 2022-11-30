@@ -19,8 +19,11 @@ jobs:
 
       - name: Get Group and Artifact ID from POM 
         run: echo "ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
+             echo $ARTIFACT_ID
              echo "GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)" >> $GITHUB_ENV
+             echo $GROUP_ID
              echo "ARTIFACT_VERSION="0.0.1" " >> $GITHUB_ENV
+             echo $ARTIFACT_VERSION
       
       - name: Download release artifact on application server
         run:  |
