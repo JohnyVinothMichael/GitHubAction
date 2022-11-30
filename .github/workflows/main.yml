@@ -16,3 +16,14 @@ jobs:
 
       - name: Build maven project
         run: mvn clean install --file pom.xml
+
+      - name: Get Group and Artifact ID from POM
+        run: |
+          ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+          GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
+          ARTIFACT_VERSION=0.0.21
+          echo $ARTIFACT_ID and $GROUP_ID
+      
+      - name: Download release artifact on application server
+        run:  artifact=$GROUP_ID:$ARTIFACT_ID:$ARTIFACT_VERSION:war
+              echo "artifact war :: $artifact "
