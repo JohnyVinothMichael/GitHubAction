@@ -18,7 +18,7 @@ jobs:
         run: mvn clean install --file pom.xml
 
       - name: Get Group and Artifact ID from POM
-        run: |
+        env:
           ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
           GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
           ARTIFACT_VERSION=0.0.21
@@ -26,6 +26,6 @@ jobs:
       
       - name: Download release artifact on application server
         run:  |
-          echo "Values " ${{env.ARTIFACT_ID}} and ${{env.GROUP_ID}} and ${{env.ARTIFACT_VERSION}}
+          echo "Values " $ARTIFACT_ID and GROUP_ID and $ARTIFACT_VERSION
           artifact=$GROUP_ID:$ARTIFACT_ID:$ARTIFACT_VERSION:war
           echo $artifact
