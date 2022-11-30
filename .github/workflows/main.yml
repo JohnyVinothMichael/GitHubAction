@@ -27,4 +27,4 @@ jobs:
       - name: Download release artifact on application server
         run:  |
           artifact=$GROUP_ID:$ARTIFACT_ID:$ARTIFACT_VERSION:war
-          echo "artifact war :: $artifact "
+          echo $artifact
