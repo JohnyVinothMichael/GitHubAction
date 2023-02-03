@@ -5,7 +5,7 @@ on:
    inputs:
      logLevel:
        description: 'QurantineTests'     
-       required: true
+       required: false
        default: ''
 
 jobs:
