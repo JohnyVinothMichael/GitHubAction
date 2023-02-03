@@ -15,6 +15,3 @@ jobs:
       with:
         name: your_input_name
         message: 'Please enter a value:'
-
-    - name: Echo the user input
-      run: echo "User entered: ${{ steps.user_input.outputs.your_input_name }}"
