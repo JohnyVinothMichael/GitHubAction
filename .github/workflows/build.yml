@@ -3,12 +3,12 @@ name: User Input Workflow
 on:
   workflow_dispatch:
    push:
-    branches: [ main ]
+     branches: [ main ]
    inputs:
-    logLevel:
-      description: 'Log level'     
-      required: true
-      default: 'warning'
+     logLevel:
+       description: 'Log level'     
+       required: true
+       default: 'warning'
 
 jobs:
   build:
