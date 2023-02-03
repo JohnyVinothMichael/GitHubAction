@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
    inputs:
      logLevel:
-       description: 'Log level'     
+       description: 'QurantineTests'     
        required: true
-       default: 'warning'
+       default: ''
 
 jobs:
   build:
