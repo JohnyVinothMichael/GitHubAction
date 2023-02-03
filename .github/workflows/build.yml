@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checking if conidition
       if: ${{ github.event.inputs.quarantinetest != '' }}
-    - run: |
+      run: |
         echo "Log level: ${{ github.event.inputs.quarantinetest }}"
