@@ -14,5 +14,5 @@ jobs:
     steps:
     - name: Checking if condition
       if: ${{ github.event.inputs.logLevel != '' }}
-    - run: |
+      run: |
         echo "Log level: ${{ github.event.inputs.logLevel }}"
