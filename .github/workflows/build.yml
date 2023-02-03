@@ -1,0 +1,20 @@
+name: User Input Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Prompt for user input
+      id: user_input
+      uses: actions/input@v2
+      with:
+        name: your_input_name
+        message: 'Please enter a value:'
+
+    - name: Echo the user input
+      run: echo "User entered: ${{ steps.user_input.outputs.your_input_name }}"
