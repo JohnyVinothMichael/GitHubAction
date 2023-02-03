@@ -3,16 +3,16 @@ name: User Input Workflow
 on:
   workflow_dispatch:
    inputs:
-     quarantinetest:
-     description: 'QurantineTests'     
-     required: true
-     default: ''
+     logLevel:
+       description: 'QurantineTests'     
+       required: true
+       default: ''
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checking if conidition
-      if: ${{ github.event.inputs.quarantinetest != '' }}
-      run: |
-        echo "Log level: ${{ github.event.inputs.quarantinetest }}"
+    - name: Checking if condition
+      if: ${{ github.event.inputs.logLevel != '' }}
+    - run: |
+        echo "Log level: ${{ github.event.inputs.logLevel }}"
