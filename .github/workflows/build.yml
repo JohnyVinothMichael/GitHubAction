@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Prompt for user input
       id: user_input
-      uses: actions/input@v2
+      uses: actions/input@v1
       with:
         name: your_input_name
         message: 'Please enter a value:'
