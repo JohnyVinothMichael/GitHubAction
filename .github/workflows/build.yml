@@ -1,17 +1,15 @@
 name: User Input Workflow
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
+  inputs:
+   logLevel:
+     description: 'Log level'     
+     required: true
+     default: 'warning'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    steps:
-    - name: Prompt for user input
-      id: user_input
-      uses: actions/input@v1
-      with:
-        name: your_input_name
-        message: 'Please enter a value:'
