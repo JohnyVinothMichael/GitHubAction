@@ -2,8 +2,6 @@ name: User Input Workflow
 
 on:
   workflow_dispatch:
-   push:
-     branches: [ main ]
    inputs:
      logLevel:
        description: 'Log level'     
