@@ -14,6 +14,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-     if: ${{ github.event.inputs.quarantinetest != '' }}
+      if: ${{ github.event.inputs.quarantinetest != '' }}
     - run: |
         echo "Log level: ${{ github.event.inputs.quarantinetest }}"
