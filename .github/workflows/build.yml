@@ -9,7 +9,6 @@ on:
      description: 'QurantineTests'     
      required: true
      default: ''
-
 jobs:
   build:
     runs-on: ubuntu-latest
