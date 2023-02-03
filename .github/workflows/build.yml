@@ -5,10 +5,10 @@ on:
    push:
     branches: [ main ]
    inputs:
-   logLevel:
-     description: 'Log level'     
-     required: true
-     default: 'warning'
+    logLevel:
+      description: 'Log level'     
+      required: true
+      default: 'warning'
 
 jobs:
   build:
