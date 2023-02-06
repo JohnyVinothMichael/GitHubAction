@@ -3,19 +3,11 @@ name: User Input Workflow
 on:
   push:
    branches: [ master, '[A-Z]+-[0-9]+**' ]
-   
-  workflow_dispatch:
-   inputs:
-     logLevel:
-       description: 'QurantineTests'     
-       required: false
-       default: ''
+  
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: Checking if condition
-      if: ${{ github.event.inputs.logLevel != '' }}
-      run: |
-        echo "Log level: ${{ github.event.inputs.logLevel }}"
+      run: mvn clean package

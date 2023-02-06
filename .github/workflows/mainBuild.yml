@@ -2,10 +2,12 @@
 name: TestMavenBuild
 
 on:
-  push:
-    branches: [ "main" ]
-
   workflow_dispatch:
+   inputs:
+     logLevel:
+       description: 'QurantineTests'     
+       required: false
+       default: ''
 
 jobs:
   build:
