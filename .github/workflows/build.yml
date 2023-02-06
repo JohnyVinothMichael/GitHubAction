@@ -1,5 +1,5 @@
 
-name: TestMavenBuild
+name: ci
 
 on:
   workflow_dispatch:
