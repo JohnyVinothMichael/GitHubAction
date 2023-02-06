@@ -1,0 +1,42 @@
+
+name: TestRelease
+
+on:
+  workflow_dispatch:
+   inputs:
+     logLevel:
+       description: 'QurantineTests'     
+       required: false
+       default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build maven project
+        run: mvn clean install --file pom.xml
+
+      - name: Get Group and Artifact ID from POM
+        run: |
+           echo ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout) >> $GITHUB_ENV
+           echo GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout) >> $GITHUB_ENV
+           echo ARTIFACT_VERSION=$ARTIFACT_ID >> $GITHUB_ENV
+
+      - name: Get the war name from pom file
+        run: |
+          WAR_NAME=$(grep finalName pom.xml  | cut -f 2 -d '>' | cut -f 1 -d '<')
+          echo WAR_NAME=$WAR_NAME >> $GITHUB_ENV
+          if [[ -z $WAR_NAME ]] ; then
+            WAR_NAME=$ARTIFACT_ID
+            echo "WAR $WAR_NAME retrieved from artifactId"
+          fi
+
+      - name: Download release artifact on application server
+        run: |
+          artifact=$GROUP_ID:$ARTIFACT_ID:$WAR_NAME:$ARTIFACT_VERSION:war
+          echo $artifact
+          echo "value of war $WAR_NAME"
+          echo $WAR_NAME
