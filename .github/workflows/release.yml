@@ -7,7 +7,6 @@ on:
      logLevel:
        description: 'QurantineTests'     
        required: false
-       default: ''
 
 jobs:
   build:
