@@ -9,7 +9,7 @@ on:
        required: false
 
 jobs:
-  build:
+  build_release:
     runs-on: ubuntu-latest
 
     steps:
