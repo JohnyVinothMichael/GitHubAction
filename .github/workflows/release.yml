@@ -2,6 +2,8 @@
 name: TestRelease
 
 on:
+  push:
+    branches: [ master, '[A-Z]+-[0-9]+**' ]
   workflow_dispatch:
    inputs:
      logLevel:
