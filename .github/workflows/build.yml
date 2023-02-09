@@ -1,44 +1,35 @@
-
-name: ci
+name: ci-build
 
 on:
   push:
-    branches: [ main ]
+      branches: [ master, '[A-Z]+-[0-9]+**' ]
   workflow_dispatch:
-   inputs:
-     logLevel:
-       description: 'QurantineTests'     
-       required: false
-       default: ''
-
+    inputs:
+      quarantineTest:
+        description: 'QurantineTests'
+        required: true
+        default: 'NA'
 jobs:
-  build_default:
-    runs-on: ubuntu-latest
+  build:
+
+    runs-on: tp2-self-hosted
 
     steps:
       - uses: actions/checkout@v3
+      - name: Build with Maven without quarantineTests
+        if: ${{ github.event.inputs.quarantineTest == 'NA' }}
+        run: mvn -B package
 
-      - name: Build maven project
-        run: mvn clean install --file pom.xml
-
-      - name: Get Group and Artifact ID from POM
+      - name: Build with Maven with quarantineTests
+        if: ${{ github.event.inputs.quarantineTest != '' }}
         run: |
-           echo ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout) >> $GITHUB_ENV
-           echo GROUP_ID=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout) >> $GITHUB_ENV
-           echo ARTIFACT_VERSION=$ARTIFACT_ID >> $GITHUB_ENV
-
-      - name: Get the war name from pom file
-        run: |
-          WAR_NAME=$(grep finalName pom.xml  | cut -f 2 -d '>' | cut -f 1 -d '<')
-          echo WAR_NAME=$WAR_NAME >> $GITHUB_ENV
-          if [[ -z $WAR_NAME ]] ; then
-            WAR_NAME=$ARTIFACT_ID
-            echo "WAR $WAR_NAME retrieved from artifactId"
-          fi
-
-      - name: Download release artifact on application server
-        run: |
-          artifact=$GROUP_ID:$ARTIFACT_ID:$WAR_NAME:$ARTIFACT_VERSION:war
-          echo $artifact
-          echo "value of war $WAR_NAME"
-          echo $WAR_NAME
+          # Split the text into an array using commas as the delimiter
+          IFS=',' read -ra words <<< "${{ github.event.inputs.quarantineTest }}"
+          # Add "!" to the beginning of each word
+          for i in "${!words[@]}"; do
+            words[$i]="!${words[$i]}"
+          done
+          # Combine the words with commas
+          quarantine_Tests=$(echo "${words[@]}" | tr ' ' ',')
+          
+          mvn -B -Dtest=$quarantine_Tests package
