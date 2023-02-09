@@ -23,6 +23,7 @@ jobs:
         if: ${{ github.event.inputs.quarantineTest != '' }}
         run: |
           # Split the text into an array using commas as the delimiter
+          #Testing
           IFS=',' read -ra words <<< "${{ github.event.inputs.quarantineTest }}"
           # Add "!" to the beginning of each word
           for i in "${!words[@]}"; do
