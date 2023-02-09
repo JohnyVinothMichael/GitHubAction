@@ -8,7 +8,7 @@ on:
         required: false
         default: ''
 jobs:
-  build:
+  build_manual:
     runs-on: ubuntu-latest
 
     steps:
