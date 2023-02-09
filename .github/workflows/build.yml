@@ -1,22 +1,20 @@
 name: ci-build
 
 on:
-  push:
-      branches: [ master, '[A-Z]+-[0-9]+**' ]
   workflow_dispatch:
     inputs:
       quarantineTest:
         description: 'QurantineTests'
-        required: true
-        default: 'NA'
+        required: false
+        default: ''
 jobs:
   build:
-    runs-on: tp2-self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
       - name: Build with Maven without quarantineTests
-        if: ${{ github.event.inputs.quarantineTest == 'NA' }}
+        if: ${{ github.event.inputs.quarantineTest == '' }}
         run: mvn -B package
 
       - name: Build with Maven with quarantineTests
