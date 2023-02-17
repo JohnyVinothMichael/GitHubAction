@@ -28,5 +28,22 @@ jobs:
           done
           # Combine the words with commas
           quarantine_Tests=$(echo "${words[@]}" | tr ' ' ',')
+          #Extract include from maven sure-fire plugin of pom file
+          xmllint --xpath "//*[local-name()='project']/*[local-name()='build']/*[local-name()='plugins']/*[local-name()='plugin'][*[local-name()='artifactId']='maven-surefire-plugin']/*[local-name()='configuration']/*[local-name()='includes']/*[local-name()='include']/text()" >>includes
+          
+          #Initialize variable for combine includes
+          finalIncludes=""
+          
+          #Read the file line by line
+          while read line
+          do
+          # Split the line by commas and add it to the finalIncludes variable
+          finalIncludes="${finalIncludes}${line},"
+          done < includes
+          
+          #Remove last comma
+          finalIncludes="${finalIncludes%,}"
+          
+          echo $quarantine_Tests,$finalIncludes          
           
           mvn -B -Dtest=$quarantine_Tests package
